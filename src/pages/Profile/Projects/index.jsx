@@ -48,7 +48,7 @@ function Projects() {
     }
   }
 
-  React.useEffect(() => {
+  React.useEffect((getData) => {
     getData();
   }, []);
 
