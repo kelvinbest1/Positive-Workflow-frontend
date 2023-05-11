@@ -1,16 +1,15 @@
-import { Provider } from "react-redux";
-import store from "./utils/store";
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './components/App/App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
 import { ConfigProvider } from "antd";
-
-const root = ReactDOM.createRoot(document.getElementById('root'));
+import store from "./redux/store";
+import { Provider } from "react-redux";
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Provider store={store}>
-  <ConfigProvider
+    <ConfigProvider
       theme={{
         token: {
           colorPrimary: "#2E3840",
@@ -20,8 +19,7 @@ root.render(
     >
       <App />
     </ConfigProvider>
-    </Provider>
+  </Provider>
 );
-
 
 reportWebVitals();
