@@ -1,26 +1,34 @@
 
-import './App.css'
-import { UserContext } from '../../data';
-import { useState } from 'react';
-import Main from '../Main'
+import { useSelector } from "react-redux";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
+
+import Home from "./pages/Home";
+import Login from "./pages/Login";
+
+
+import Register from "./pages/Register";
 
 function App() {
-  // grab the provider object from UserContext 
-    const {Provider: UserInfo} = UserContext
-    const [currentUser, setCurrentUser] = useState(null)
-    // console.log(UserInfo)
+  const { loading } = useSelector((state) => state.loaders);
   return (
-    <div className="App">
-        {/* wrap header and main with context  */}
-        
-        <UserInfo value={{
-                user: currentUser,
-                setUser: setCurrentUser
-            }}>
+    <div>
+      {loading }
+      <BrowserRouter>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <ProtectedPage>
+                <Home />
+              </ProtectedPage>
+            }
+          />
           
-            <Main/>
-        </UserInfo>
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
