@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import {useSelector } from "react-redux";
 import { GetProjectsByRole } from "../../apicalls/projects";
 import { getDateFormat } from "../../utils/helpers";
 import Divider from "../../components/Divider";
@@ -11,15 +12,11 @@ import { message } from "antd";
 
 function Home(props) {
     const [projects, setProjects] = useState([]);
-
-
+    const { user } = useSelector((state) => state.users);
     const navigate = useNavigate();
-
     const getData = async () => {
         try {
-
             const response = await GetProjectsByRole();
-
             if (response.success) {
                 setProjects(response.data);
             } else {
@@ -30,7 +27,6 @@ function Home(props) {
             message.error(error.message);
         }
     };
-
     useEffect(() => {
         getData();
     }, []);
@@ -90,3 +86,8 @@ function Home(props) {
 }
 
 export default Home;
+
+
+
+
+
