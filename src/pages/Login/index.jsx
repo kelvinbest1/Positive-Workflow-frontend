@@ -1,24 +1,24 @@
 import React, { useEffect } from "react";
 import { Form, Input, Button, message } from "antd";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Divider from "../../components/Divider";
-import { RegisterUser } from "../../apicalls/users";
+import { LoginUser } from "../../apicalls/users";
 
 
 import { getAntdFormInputRules } from "../../utils/helpers";
 
-function Register() {
-  const navigate = useNavigate();
- 
+function Login() {
+
   
   const onFinish = async (values) => {
     try {
-    
-      const response = await RegisterUser(values);
      
+      const response = await LoginUser(values);
+   
       if (response.success) {
+        localStorage.setItem("token", response.data);
         message.success(response.message);
-        navigate("/login");
+        window.location.href = "/";
       } else {
         throw new Error(response.message);
       }
@@ -30,9 +30,9 @@ function Register() {
 
   useEffect(() => {
     if (localStorage.getItem("token")) {
-      navigate("/");
+      window.location.href = "/";
     }
-  }, [navigate]);
+  }, []);
 
   return (
     <div className="grid grid-cols-2">
@@ -40,32 +40,18 @@ function Register() {
         <div>
           <h1 className="text-7xl text-white">Positive Workflow</h1>
           <span className=" text-white mt-5">
-           Working Together For Change
+            Together We Are Successful
           </span>
         </div>
       </div>
       <div className="flex justify-center items-center">
         <div className="w-[420px]">
-          <h1 className="text-2xl text-gray-700 uppercase">
-            Lets get you started
-          </h1>
+          <h1 className="text-2xl text-gray-700">LOGIN TO YOUR ACCOUNT</h1>
           <Divider />
           <Form layout="vertical" onFinish={onFinish}>
             <Form.Item
-              label="First Name"
-              name="firstName"
-              rules={getAntdFormInputRules}
-            >
-              <Input />
-            </Form.Item>
-            <Form.Item
-              label="Last Name"
-              name="lastName"
-              rules={getAntdFormInputRules}
-            >
-              <Input />
-            </Form.Item>
-            <Form.Item label="Email" name="email"
+              label="Email"
+              name="email"
               rules={getAntdFormInputRules}
             >
               <Input />
@@ -82,14 +68,14 @@ function Register() {
               type="primary"
               htmlType="submit"
               block
-            
+             
             >
-              
+            
             </Button>
 
             <div className="flex justify-center mt-5">
               <span>
-                Already have an account? <Link to="/login">Login</Link>
+                Don't have an account? <Link to="/register">Register</Link>
               </span>
             </div>
           </Form>
@@ -99,4 +85,4 @@ function Register() {
   );
 }
 
-export default Register;
+export default Login;
