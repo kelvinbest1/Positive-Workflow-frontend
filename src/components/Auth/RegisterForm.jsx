@@ -1,4 +1,4 @@
-import { Form, Input, Button, message } from "antd";
+import { Form, Input, Button,} from "antd";
 import {useState, useContext} from 'react';
 import { getAntdFormInputRules } from "../../utils/helpers";
 import { Link, useNavigate } from "react-router-dom";
@@ -54,7 +54,7 @@ const RegisterForm = () => {
             Lets get you started
           </h1>
           <Divider />
-          <Form layout="vertical" onFinish={onFinish}>
+          <Form layout="vertical" onChange={handleSubmit}>
             <Form.Item
               label="First Name"
               name="firstName"
@@ -86,9 +86,9 @@ const RegisterForm = () => {
               type="primary"
               htmlType="submit"
               block
-              loading={buttonLoading}
-            >
-              {buttonLoading ? "Loading" : "Register"}
+              >
+              onChange={handleChange}
+            
             </Button>
 
             <div className="flex justify-center mt-5">
@@ -104,4 +104,9 @@ const RegisterForm = () => {
 }
 
 export default RegisterForm;
+
+
+
+
+
 
