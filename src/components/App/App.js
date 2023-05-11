@@ -1,3 +1,5 @@
+
+import './App.css'
 import { UserContext } from '../../data';
 import { useState } from 'react';
 import Main from '../Main'
@@ -11,6 +13,7 @@ function App() {
   return (
     <div className="App">
         {/* wrap header and main with context  */}
+        
         <UserInfo value={{
                 user: currentUser,
                 setUser: setCurrentUser
