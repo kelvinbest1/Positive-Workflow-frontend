@@ -1,11 +1,14 @@
 import { Form, Input, Button, message } from "antd";
-import {useNavigate} from 'react-router-dom';
 import {useState, useContext} from 'react';
-
-import {signUp} from '../../utilities/auth-services'
-import {setUserToken} from '../../utilities/authToken'
-
+import { getAntdFormInputRules } from "../../utils/helpers";
+import { Link, useNavigate } from "react-router-dom";
+import Divider from "../../components/Divider";
+import {signUp} from '../../utils/auth-services'
+import {setUserToken} from '../../utils/authToken'
 import { UserContext } from '../../data';
+
+
+
 
 
 const RegisterForm = () => {
